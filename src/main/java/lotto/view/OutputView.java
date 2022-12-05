@@ -10,6 +10,7 @@ public class OutputView {
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DELIMITER_LINE = "---";
+    private static final String ERROR_PREFIX = "[ERROR] "
 
     public void printInputLottoPurchaseMoneyMessage() {
         printMessage(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
@@ -37,6 +38,10 @@ public class OutputView {
 
     public void printDelimiterLine() {
         printMessage(DELIMITER_LINE);
+    }
+
+    public void printError(String errorMessage) {
+        System.out.println(ERROR_PREFIX + errorMessage);
     }
 
     public void printMessage(String message) {
