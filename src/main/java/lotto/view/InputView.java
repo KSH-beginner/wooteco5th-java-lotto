@@ -14,9 +14,10 @@ public class InputView {
         return Console.readLine();
     }
 
-    public List<String> inputLottoWinningNumbers() {
+    public List<Integer> inputLottoWinningNumbers() {
         String lottoWinningNumbers = Console.readLine();
         return Arrays.stream(lottoWinningNumbers.split(LOTTO_WINNING_NUMBERS_SPLIT_DELIMITER))
+                .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
 }
