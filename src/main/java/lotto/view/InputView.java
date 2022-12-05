@@ -20,4 +20,8 @@ public class InputView {
                 .map(Integer::valueOf)
                 .collect(Collectors.toList());
     }
+
+    public int inputLottoBonusNumber() {
+        return Integer.parseInt(Console.readLine());
+    }
 }
