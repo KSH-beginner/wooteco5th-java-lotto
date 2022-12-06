@@ -20,7 +20,19 @@ public class InputView {
     private static final String DIGIT_REGEX = "[0-9]+";
 
     public int inputLottoPurchaseMoney() {
-        return Integer.parseInt(Console.readLine());
+        String inputLottoPurchaseMoney = Console.readLine();
+        validateInputLottoPurchaseMoney(inputLottoPurchaseMoney);
+        return Integer.parseInt(inputLottoPurchaseMoney);
+    }
+
+    private void validateInputLottoPurchaseMoney(String inputLottoPurchaseMoney) {
+        if (isInputLottoPurchaseMoneyNotDigit(inputLottoPurchaseMoney)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 구입 금액은 숫자여야합니다.");
+        }
+    }
+
+    private boolean isInputLottoPurchaseMoneyNotDigit(String inputLottoPurchaseMoney) {
+        return !Pattern.matches(DIGIT_REGEX, inputLottoPurchaseMoney);
     }
 
     public List<Integer> inputLottoWinningNumbers() {
