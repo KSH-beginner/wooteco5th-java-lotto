@@ -54,6 +54,10 @@ public class OutputView {
         printMessage("6개 일치 (2,000,000,000원) - " + lottoRankCountMap.get(FIFTH_RANK_COUNT_KEY) + "개");
     }
 
+    public void printYieldRate(double yieldRate) {
+        printMessage("총 수익률은 " + yieldRate + "%입니다.");
+    }
+
     public void printError(String errorMessage) {
         System.out.println(ERROR_PREFIX + errorMessage);
     }
