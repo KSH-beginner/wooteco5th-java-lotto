@@ -29,10 +29,18 @@ public class InputView {
         if (isInputLottoPurchaseMoneyNotDigit(inputLottoPurchaseMoney)) {
             throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 구입 금액은 숫자여야합니다.");
         }
+        if (cannotDivide1000(inputLottoPurchaseMoney)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 구입 금액은 1000원으로 나누어 떨어져야합니다.");
+        }
     }
 
     private boolean isInputLottoPurchaseMoneyNotDigit(String inputLottoPurchaseMoney) {
         return !Pattern.matches(DIGIT_REGEX, inputLottoPurchaseMoney);
+    }
+
+    private boolean cannotDivide1000(String inputLottoPurchaseMoney) {
+        int lottoPurchaseMoney = Integer.parseInt(inputLottoPurchaseMoney);
+        return lottoPurchaseMoney % 1000 != 0;
     }
 
     public List<Integer> inputLottoWinningNumbers() {
