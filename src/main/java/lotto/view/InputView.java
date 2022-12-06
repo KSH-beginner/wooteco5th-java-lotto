@@ -17,6 +17,7 @@ public class InputView {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_WINNING_NUMBERS_SIZE = 6;
+    private static final String DIGIT_REGEX = "[0-9]+";
 
     public int inputLottoPurchaseMoney() {
         return Integer.parseInt(Console.readLine());
@@ -69,5 +70,21 @@ public class InputView {
     private boolean isNumbersDuplicate(String inputLottoWinningNumbers) {
         Set<Integer> convertedLottoWinningNumbers = new HashSet<>(splitLottoWinningNumbers(inputLottoWinningNumbers));
         return convertedLottoWinningNumbers.size() != LOTTO_WINNING_NUMBERS_SIZE;
+    }
+
+    public int inputBonusNumber() {
+        String bonusNumber = Console.readLine();
+        validateInputBonusNumber(bonusNumber);
+        return Integer.parseInt(bonusNumber);
+    }
+
+    private void validateInputBonusNumber(String inputBonusNumber) {
+        if (isBonusNumberNotDigit(inputBonusNumber)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "보너스 번호는 숫자여야합니다.");
+        }
+    }
+
+    private boolean isBonusNumberNotDigit(String inputBonusNumber) {
+        return !Pattern.matches(DIGIT_REGEX, inputBonusNumber);
     }
 }
