@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import lotto.domain.LottoNumbersGenerator;
 import org.assertj.core.api.Assertions;
