@@ -10,8 +10,8 @@ public class InputView {
 
     private static final String LOTTO_WINNING_NUMBERS_SPLIT_DELIMITER = ",";
 
-    public String inputLottoPurchaseMoney() {
-        return Console.readLine();
+    public int inputLottoPurchaseMoney() {
+        return Integer.parseInt(Console.readLine());
     }
 
     public List<Integer> inputLottoWinningNumbers() {
