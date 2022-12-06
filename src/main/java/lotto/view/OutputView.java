@@ -1,5 +1,7 @@
 package lotto.view;
 
+import lotto.ErrorConstants;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +13,6 @@ public class OutputView {
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DELIMITER_LINE = "---";
-    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final int FIRST_RANK_COUNT_KEY = 1;
     private static final int SECOND_RANK_COUNT_KEY = 2;
     private static final int THIRD_RANK_COUNT_KEY = 3;
@@ -59,7 +60,7 @@ public class OutputView {
     }
 
     public void printError(String errorMessage) {
-        System.out.println(ERROR_PREFIX + errorMessage);
+        System.out.println(ErrorConstants.ERROR_PREFIX + errorMessage);
     }
 
     public void printMessage(String message) {
