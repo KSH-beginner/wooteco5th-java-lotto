@@ -82,9 +82,17 @@ public class InputView {
         if (isBonusNumberNotDigit(inputBonusNumber)) {
             throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "보너스 번호는 숫자여야합니다.");
         }
+        if (isBonusNumberWrongRange(inputBonusNumber)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "보너스 번호는 1~45 사이의 숫자여야합니다.");
+        }
     }
 
     private boolean isBonusNumberNotDigit(String inputBonusNumber) {
         return !Pattern.matches(DIGIT_REGEX, inputBonusNumber);
+    }
+
+    private boolean isBonusNumberWrongRange(String inputBonusNumber) {
+        int bonusNumber = Integer.parseInt(inputBonusNumber);
+        return bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER;
     }
 }
