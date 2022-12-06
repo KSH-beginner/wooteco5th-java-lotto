@@ -4,7 +4,9 @@ import camp.nextstep.edu.missionutils.Console;
 import lotto.ErrorConstants;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -42,6 +44,9 @@ public class InputView {
         if (isNumbersSizeNotSix(inputLottoWinningNumbers)) {
             throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 번호는 6개여야합니다.");
         }
+        if (isNumbersDuplicate(inputLottoWinningNumbers)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "당첨 번호 숫자는 중복될 수 없습니다.");
+        }
     }
 
     private boolean isNumbersDelimiterNotComma(String inputLottoWinningNumbers) {
@@ -59,5 +64,10 @@ public class InputView {
     private boolean isNumbersSizeNotSix(String inputLottoWinningNumbers) {
         List<Integer> splitNumbers = splitLottoWinningNumbers(inputLottoWinningNumbers);
         return splitNumbers.size() != LOTTO_WINNING_NUMBERS_SIZE;
+    }
+
+    private boolean isNumbersDuplicate(String inputLottoWinningNumbers) {
+        Set<Integer> convertedLottoWinningNumbers = new HashSet<>(splitLottoWinningNumbers(inputLottoWinningNumbers));
+        return convertedLottoWinningNumbers.size() != LOTTO_WINNING_NUMBERS_SIZE;
     }
 }
