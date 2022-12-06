@@ -12,8 +12,9 @@ public class InputView {
 
     private static final String LOTTO_WINNING_NUMBERS_SPLIT_DELIMITER = ",";
     private static final String LOTTO_WINNING_NUMBERS_REGEX = "[0-9]*[,]{0,1}[0-9]+";
-    private static final int MIN_LOTTO_WINNING_NUMBER = 1;
-    private static final int MAX_LOTTO_WINNING_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int LOTTO_WINNING_NUMBERS_SIZE = 6;
 
     public int inputLottoPurchaseMoney() {
         return Integer.parseInt(Console.readLine());
@@ -38,6 +39,9 @@ public class InputView {
         if (isNumbersWrongRange(inputLottoWinningNumbers)) {
             throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 번호는 1~45 사이의 숫자여야합니다.");
         }
+        if (isNumbersSizeNotSix(inputLottoWinningNumbers)) {
+            throw new IllegalArgumentException(ErrorConstants.ERROR_PREFIX + "로또 번호는 6개여야합니다.");
+        }
     }
 
     private boolean isNumbersDelimiterNotComma(String inputLottoWinningNumbers) {
@@ -47,12 +51,13 @@ public class InputView {
     private boolean isNumbersWrongRange(String inputLottoWinningNumbers) {
         List<Integer> splitNumbers = splitLottoWinningNumbers(inputLottoWinningNumbers);
         long wrongRangeNumberCount = splitNumbers.stream()
-                .filter(number -> number < MIN_LOTTO_WINNING_NUMBER || number > MAX_LOTTO_WINNING_NUMBER)
+                .filter(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER)
                 .count();
         return wrongRangeNumberCount != 0;
     }
 
-    public int inputLottoBonusNumber() {
-        return Integer.parseInt(Console.readLine());
+    private boolean isNumbersSizeNotSix(String inputLottoWinningNumbers) {
+        List<Integer> splitNumbers = splitLottoWinningNumbers(inputLottoWinningNumbers);
+        return splitNumbers.size() != LOTTO_WINNING_NUMBERS_SIZE;
     }
 }
