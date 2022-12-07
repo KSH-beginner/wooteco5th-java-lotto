@@ -42,11 +42,11 @@ public enum LottoRank {
         return THIRD;
     }
 
-    public int getRank(LottoRank lottoRank) {
+    public static int getRank(LottoRank lottoRank) {
         return lottoRank.rank;
     }
 
-    public int getWinningAmount(LottoRank lottoRank) {
+    public static int getWinningAmount(LottoRank lottoRank) {
         return lottoRank.winningAmount;
     }
 }
