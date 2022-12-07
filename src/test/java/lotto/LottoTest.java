@@ -24,5 +24,10 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // 아래에 추가 테스트 작성 가능
+    @Test
+    void 발행_로또_번호가_6개가_아니면_예외_처리() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 3, 4, 5, 6, 7)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorConstants.ERROR_PREFIX + "로또 번호는 6개여야합니다.");
+    }
 }
