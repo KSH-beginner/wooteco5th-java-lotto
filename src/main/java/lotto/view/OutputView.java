@@ -19,12 +19,15 @@ public class OutputView {
     private static final int THIRD_RANK_COUNT_KEY = 3;
     private static final int FOURTH_RANK_COUNT_KEY = 4;
     private static final int FIFTH_RANK_COUNT_KEY = 5;
+    private static final String YIELD_RATE_DECIMAL_FORMAT = "###,###.0";
+    private static final String BLANK_LINE = "";
 
     public void printInputLottoPurchaseMoneyMessage() {
         printMessage(INPUT_LOTTO_PURCHASE_MONEY_MESSAGE);
     }
 
     public void printNumberOfPurchaseLotto(int numberOfPurchaseLotto) {
+        printBlankLine();
         printMessage(numberOfPurchaseLotto + NUMBER_OF_PURCHASE_LOTTO_MESSAGE);
     }
 
@@ -33,14 +36,17 @@ public class OutputView {
     }
 
     public void printInputLottoWinningNumbersMessage() {
+        printBlankLine();
         printMessage(INPUT_LOTTO_WINNING_NUMBERS_MESSAGE);
     }
 
     public void printInputLottoBonusNumberMessage() {
+        printBlankLine();
         printMessage(INPUT_LOTTO_BONUS_NUMBER_MESSAGE);
     }
 
     public void printWinningStatisticsMessage() {
+        printBlankLine();
         printMessage(WINNING_STATISTICS_MESSAGE);
     }
 
@@ -57,13 +63,13 @@ public class OutputView {
     }
 
     public void printYieldRate(double yieldRate) {
-        DecimalFormat yieldRateFormat = new DecimalFormat("###,###.0");
+        DecimalFormat yieldRateFormat = new DecimalFormat(YIELD_RATE_DECIMAL_FORMAT);
         String formattedYieldRate = yieldRateFormat.format(yieldRate);
         printMessage("총 수익률은 " + formattedYieldRate + "%입니다.");
     }
 
-    public void printError(String errorMessage) {
-        System.out.println(ErrorConstants.ERROR_PREFIX + errorMessage);
+    public void printBlankLine() {
+        System.out.println(BLANK_LINE);
     }
 
     public void printMessage(String message) {
