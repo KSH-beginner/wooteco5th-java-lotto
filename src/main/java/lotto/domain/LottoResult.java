@@ -1,46 +1,32 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LottoResult {
 
-    private static final int FIRST_RANK_COUNT_KEY = 1;
-    private static final int SECOND_RANK_COUNT_KEY = 2;
-    private static final int THIRD_RANK_COUNT_KEY = 3;
-    private static final int FOURTH_RANK_COUNT_KEY = 4;
-    private static final int FIFTH_RANK_COUNT_KEY = 5;
-    private static final String YIELD_RATE_FORMAT = "%.1f";
-
-    private final Map<Integer, Integer> lottoRankCountMap = new HashMap<>();
-    private int winningAmountSum;
-    private double yieldRate;
+    private final Map<LottoRank, Integer> lottoRankCountMap = new LinkedHashMap<>();
 
     public LottoResult() {
         initLottoRankCountMap();
     }
 
-    public void generate(List<Lotto> issuedLottos, WinningLotto winningLotto, int lottoPurchaseMoney) {
+    public void generateLottoRankCountMap(List<Lotto> issuedLottos, WinningLotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
         int bonusNumber = winningLotto.getBonusNumber();
         for (Lotto issueLotto : issuedLottos) {
             LottoRank lottoRank = getLottoRank(winningNumbers, bonusNumber, issueLotto);
             if (lottoRank != LottoRank.NO_RANK) {
                 putLottoRankCountMap(lottoRank);
-                addWinningAmount(lottoRank);
             }
         }
-        calculateYieldRate(winningAmountSum, lottoPurchaseMoney);
     }
 
     private void initLottoRankCountMap() {
-        lottoRankCountMap.put(FIRST_RANK_COUNT_KEY, 0);
-        lottoRankCountMap.put(SECOND_RANK_COUNT_KEY, 0);
-        lottoRankCountMap.put(THIRD_RANK_COUNT_KEY, 0);
-        lottoRankCountMap.put(FOURTH_RANK_COUNT_KEY, 0);
-        lottoRankCountMap.put(FIFTH_RANK_COUNT_KEY, 0);
+        lottoRankCountMap.put(LottoRank.FIRST, 0);
+        lottoRankCountMap.put(LottoRank.SECOND, 0);
+        lottoRankCountMap.put(LottoRank.THIRD, 0);
+        lottoRankCountMap.put(LottoRank.FOURTH, 0);
+        lottoRankCountMap.put(LottoRank.FIFTH, 0);
     }
 
     private LottoRank getLottoRank(List<Integer> winningNumbers, int bonusNumber, Lotto issueLotto) {
@@ -53,23 +39,15 @@ public class LottoResult {
     }
 
     private void putLottoRankCountMap(LottoRank lottoRank) {
-        int rank = LottoRank.getRank(lottoRank);
-        lottoRankCountMap.put(rank, lottoRankCountMap.get(rank) + 1);
+        lottoRankCountMap.put(lottoRank, lottoRankCountMap.get(lottoRank) + 1);
     }
 
-    private void addWinningAmount(LottoRank lottoRank) {
-        winningAmountSum += LottoRank.getWinningAmount(lottoRank);
+    public double getYieldRate(int lottoPurchaseMoney) {
+        int totalPrize = LottoRank.getTotalPrize(lottoRankCountMap);
+        return ((double) totalPrize / lottoPurchaseMoney) * 100;
     }
 
-    private void calculateYieldRate(int winningAmountSum, int lottoPurchaseMoney) {
-        yieldRate = ((double) winningAmountSum / lottoPurchaseMoney) * 100;
-    }
-
-    public Map<Integer, Integer> getLottoRankCountMap() {
+    public Map<LottoRank, Integer> getLottoRankCountMap() {
         return Collections.unmodifiableMap(lottoRankCountMap);
-    }
-
-    public double getYieldRate() {
-        return yieldRate;
     }
 }
