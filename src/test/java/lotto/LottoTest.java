@@ -30,4 +30,11 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ErrorConstants.ERROR_PREFIX + "로또 번호는 6개여야합니다.");
     }
+
+    @Test
+    void 발행_로또_번호_간_중복_있으면_예외_처리() {
+        assertThatThrownBy(() -> new Lotto(List.of(1, 2, 2, 4, 5, 6)))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorConstants.ERROR_PREFIX + "로또 번호는 중복되면 안됩니다.");
+    }
 }
