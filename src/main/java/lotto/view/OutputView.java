@@ -15,7 +15,7 @@ public class OutputView {
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DELIMITER_LINE = "---";
-    private static final String YIELD_RATE_DECIMAL_FORMAT = "###,###.0";
+    private static final String YIELD_RATE_DECIMAL_FORMAT = "###,##0.0";
     private static final String BLANK_LINE = "";
 
     public void printInputLottoPurchaseMoneyMessage() {
