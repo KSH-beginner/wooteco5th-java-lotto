@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.Map;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,5 +55,19 @@ class LottoRankTest {
         LottoRank lottoRank = LottoRank.getLottoRank(matchNumberCount, isMatchBonusNumber);
 
         assertThat(lottoRank).isEqualTo(LottoRank.FIRST);
+    }
+
+    @Test
+    void 총_상금_구하는_기능() {
+        Map<LottoRank, Integer> lottoRankCountMap = Map.of(
+                LottoRank.FIRST, 1,
+                LottoRank.SECOND, 1,
+                LottoRank.THIRD, 1,
+                LottoRank.FOURTH, 0,
+                LottoRank.FIFTH, 1
+        );
+        int totalPrize = LottoRank.getTotalPrize(lottoRankCountMap);
+
+        assertThat(totalPrize).isEqualTo(2031505000);
     }
 }

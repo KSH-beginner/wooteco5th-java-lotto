@@ -1,7 +1,11 @@
 package lotto.domain;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
 
@@ -13,6 +17,11 @@ public enum LottoRank {
     FIFTH(5, 3L, 5000);
 
     private static final long SECOND_OR_THIRD_MATCH_NUMBER = 5L;
+    private static final int FIRST_RANK_COUNT_INDEX = 0;
+    private static final int SECOND_RANK_COUNT_INDEX = 1;
+    private static final int THIRD_RANK_COUNT_INDEX = 2;
+    private static final int FOURTH_RANK_COUNT_INDEX = 3;
+    private static final int FIFTH_RANK_COUNT_INDEX = 4;
 
     private final int rank;
     private final long matchNumberCount;
@@ -40,6 +49,17 @@ public enum LottoRank {
             return SECOND;
         }
         return THIRD;
+    }
+
+    public static int getTotalPrize(Map<LottoRank, Integer> lottoRankCountMap) {
+        List<Integer> lottoRankCounts = new ArrayList<>(lottoRankCountMap.values());
+        int totalFirstPrize = LottoRank.FIRST.winningAmount * lottoRankCounts.get(FIRST_RANK_COUNT_INDEX);
+        int totalSecondPrize = LottoRank.SECOND.winningAmount * lottoRankCounts.get(SECOND_RANK_COUNT_INDEX);
+        int totalThirdPrize = LottoRank.THIRD.winningAmount * lottoRankCounts.get(THIRD_RANK_COUNT_INDEX);
+        int totalFourthPrize = LottoRank.FOURTH.winningAmount * lottoRankCounts.get(FOURTH_RANK_COUNT_INDEX);
+        int totalFifthPrize = LottoRank.FIFTH.winningAmount * lottoRankCounts.get(FIFTH_RANK_COUNT_INDEX);
+
+        return totalFirstPrize + totalSecondPrize + totalThirdPrize + totalFourthPrize + totalFifthPrize;
     }
 
     public static int getRank(LottoRank lottoRank) {
