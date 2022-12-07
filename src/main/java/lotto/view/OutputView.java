@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.ErrorConstants;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,9 @@ public class OutputView {
     }
 
     public void printYieldRate(double yieldRate) {
-        printMessage("총 수익률은 " + yieldRate + "%입니다.");
+        DecimalFormat yieldRateFormat = new DecimalFormat("###,###.0");
+        String formattedYieldRate = yieldRateFormat.format(yieldRate);
+        printMessage("총 수익률은 " + formattedYieldRate + "%입니다.");
     }
 
     public void printError(String errorMessage) {

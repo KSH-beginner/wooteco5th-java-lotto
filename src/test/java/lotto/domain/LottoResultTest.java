@@ -51,6 +51,6 @@ class LottoResultTest {
     void 수익률_구하는_기능() {
         double yieldRate = lottoResult.getYieldRate();
 
-        Assertions.assertThat(yieldRate).isEqualTo(50787625.0);
+        Assertions.assertThat(yieldRate).isEqualTo(50787625);
     }
 }
