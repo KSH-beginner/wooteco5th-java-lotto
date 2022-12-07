@@ -24,8 +24,7 @@ class LottoResultTest {
         issuedLottos.add(new Lotto(List.of(2, 3, 4, 5, 6, 7))); // 2등
         issuedLottos.add(new Lotto(List.of(2, 3, 4, 5, 6, 8))); // 3등
         issuedLottos.add(new Lotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
-        lottoResult = new LottoResult();
-        lottoResult.generateLottoRankCountMap(issuedLottos, winningLotto);
+        lottoResult = new LottoResult(issuedLottos, winningLotto);
     }
 
     @Test

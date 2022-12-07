@@ -6,11 +6,12 @@ public class LottoResult {
 
     private final Map<LottoRank, Integer> lottoRankCountMap = new LinkedHashMap<>();
 
-    public LottoResult() {
+    public LottoResult(List<Lotto> issuedLottos, WinningLotto winningLotto) {
         initLottoRankCountMap();
+        generateLottoRankCountMap(issuedLottos, winningLotto);
     }
 
-    public void generateLottoRankCountMap(List<Lotto> issuedLottos, WinningLotto winningLotto) {
+    private void generateLottoRankCountMap(List<Lotto> issuedLottos, WinningLotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
         int bonusNumber = winningLotto.getBonusNumber();
         for (Lotto issueLotto : issuedLottos) {
