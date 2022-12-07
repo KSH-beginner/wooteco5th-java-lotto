@@ -7,8 +7,18 @@ import java.util.Map;
 
 public class LottoResult {
 
+    private static final int FIRST_RANK_COUNT_KEY = 1;
+    private static final int SECOND_RANK_COUNT_KEY = 2;
+    private static final int THIRD_RANK_COUNT_KEY = 3;
+    private static final int FOURTH_RANK_COUNT_KEY = 4;
+    private static final int FIFTH_RANK_COUNT_KEY = 5;
+
     private final Map<Integer, Integer> lottoRankCountMap = new HashMap<>();
     private int winningAmountSum;
+
+    public LottoResult() {
+        initLottoRankCountMap();
+    }
 
     public void generate(List<Lotto> issuedLottos, WinningLotto winningLotto) {
         List<Integer> winningNumbers = winningLotto.getNumbers();
@@ -19,6 +29,14 @@ public class LottoResult {
                 putLottoRankCountMap(lottoRank);
             }
         }
+    }
+
+    private void initLottoRankCountMap() {
+        lottoRankCountMap.put(FIRST_RANK_COUNT_KEY, 0);
+        lottoRankCountMap.put(SECOND_RANK_COUNT_KEY, 0);
+        lottoRankCountMap.put(THIRD_RANK_COUNT_KEY, 0);
+        lottoRankCountMap.put(FOURTH_RANK_COUNT_KEY, 0);
+        lottoRankCountMap.put(FIFTH_RANK_COUNT_KEY, 0);
     }
 
     private LottoRank getLottoRank(List<Integer> winningNumbers, int bonusNumber, Lotto issueLotto) {
@@ -32,7 +50,7 @@ public class LottoResult {
 
     private void putLottoRankCountMap(LottoRank lottoRank) {
         int rank = lottoRank.getRank(lottoRank);
-        lottoRankCountMap.put(rank, lottoRankCountMap.getOrDefault(rank, 0) + 1);
+        lottoRankCountMap.put(rank, lottoRankCountMap.get(rank) + 1);
     }
 
     public Map<Integer, Integer> getLottoRankCountMap() {
