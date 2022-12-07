@@ -63,7 +63,7 @@ public class LottoResult {
 
     private void calculateYieldRate(int winningAmountSum, int lottoPurchaseMoney) {
         String formattingYieldRate = String.format(YIELD_RATE_FORMAT,
-                (double) (winningAmountSum / lottoPurchaseMoney) * 100);
+                ((double) winningAmountSum / lottoPurchaseMoney) * 100);
         yieldRate = Double.parseDouble(formattingYieldRate);
     }
 
