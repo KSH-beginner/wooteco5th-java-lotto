@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class InputView {
 
     private static final String LOTTO_WINNING_NUMBERS_SPLIT_DELIMITER = ",";
-    private static final String LOTTO_WINNING_NUMBERS_REGEX = "[0-9]*[,]{0,1}[0-9]+";
+    private static final String LOTTO_WINNING_NUMBERS_REGEX = "([0-9]+,?)+";
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
     private static final int LOTTO_WINNING_NUMBERS_SIZE = 6;
