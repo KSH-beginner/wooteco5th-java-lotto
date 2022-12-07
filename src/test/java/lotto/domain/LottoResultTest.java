@@ -16,7 +16,6 @@ class LottoResultTest {
 
     private List<Lotto> issuedLottos = new ArrayList<>();
     private WinningLotto winningLotto;
-    private int lottoPurchaseMoney;
 
     @BeforeEach
     void initLottoCondition() {
@@ -25,20 +24,19 @@ class LottoResultTest {
         issuedLottos.add(new Lotto(List.of(2, 3, 4, 5, 6, 7))); // 2등
         issuedLottos.add(new Lotto(List.of(2, 3, 4, 5, 6, 8))); // 3등
         issuedLottos.add(new Lotto(List.of(1, 2, 3, 8, 9, 10))); // 5등
-        lottoPurchaseMoney = 4000;
         lottoResult = new LottoResult();
-        lottoResult.generate(issuedLottos, winningLotto, lottoPurchaseMoney);
+        lottoResult.generateLottoRankCountMap(issuedLottos, winningLotto);
     }
 
     @Test
     void 당첨_내역_생성_기능() {
-        Map<Integer, Integer> lottoRankCountMap = lottoResult.getLottoRankCountMap();
+        Map<LottoRank, Integer> lottoRankCountMap = lottoResult.getLottoRankCountMap();
 
-        Integer firstCount = lottoRankCountMap.get(1);
-        Integer secondCount = lottoRankCountMap.get(2);
-        Integer thirdCount = lottoRankCountMap.get(3);
-        Integer fourthCount = lottoRankCountMap.get(4);
-        Integer fifthCount = lottoRankCountMap.get(5);
+        Integer firstCount = lottoRankCountMap.get(LottoRank.FIRST);
+        Integer secondCount = lottoRankCountMap.get(LottoRank.SECOND);
+        Integer thirdCount = lottoRankCountMap.get(LottoRank.THIRD);
+        Integer fourthCount = lottoRankCountMap.get(LottoRank.FOURTH);
+        Integer fifthCount = lottoRankCountMap.get(LottoRank.FIFTH);
 
         Assertions.assertThat(firstCount).isEqualTo(1);
         Assertions.assertThat(secondCount).isEqualTo(1);
@@ -49,7 +47,8 @@ class LottoResultTest {
 
     @Test
     void 수익률_구하는_기능() {
-        double yieldRate = lottoResult.getYieldRate();
+        int lottoPurchaseMoney = 4000;
+        double yieldRate = lottoResult.getYieldRate(lottoPurchaseMoney);
 
         Assertions.assertThat(yieldRate).isEqualTo(50787625);
     }
