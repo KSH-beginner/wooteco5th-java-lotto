@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.ErrorConstants;
+import lotto.domain.LottoRank;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -14,11 +15,6 @@ public class OutputView {
     private static final String INPUT_LOTTO_BONUS_NUMBER_MESSAGE = "보너스 번호를 입력해 주세요.";
     private static final String WINNING_STATISTICS_MESSAGE = "당첨 통계";
     private static final String DELIMITER_LINE = "---";
-    private static final int FIRST_RANK_COUNT_KEY = 1;
-    private static final int SECOND_RANK_COUNT_KEY = 2;
-    private static final int THIRD_RANK_COUNT_KEY = 3;
-    private static final int FOURTH_RANK_COUNT_KEY = 4;
-    private static final int FIFTH_RANK_COUNT_KEY = 5;
     private static final String YIELD_RATE_DECIMAL_FORMAT = "###,###.0";
     private static final String BLANK_LINE = "";
 
@@ -54,12 +50,12 @@ public class OutputView {
         printMessage(DELIMITER_LINE);
     }
 
-    public void printLottoRank(Map<Integer, Integer> lottoRankCountMap) {
-        printMessage("3개 일치 (5,000원) - " + lottoRankCountMap.get(FIRST_RANK_COUNT_KEY) + "개");
-        printMessage("4개 일치 (50,000원) - " + lottoRankCountMap.get(SECOND_RANK_COUNT_KEY) + "개");
-        printMessage("5개 일치 (1,500,000원) - " + lottoRankCountMap.get(THIRD_RANK_COUNT_KEY) + "개");
-        printMessage("5개 일치, 보너스 볼 일치 (30,000,000원) - " + lottoRankCountMap.get(FOURTH_RANK_COUNT_KEY) + "개");
-        printMessage("6개 일치 (2,000,000,000원) - " + lottoRankCountMap.get(FIFTH_RANK_COUNT_KEY) + "개");
+    public void printLottoRank(Map<LottoRank, Integer> lottoRankCountMap) {
+        printMessage("3개 일치 (5,000원) - " + lottoRankCountMap.get(LottoRank.FIFTH) + "개");
+        printMessage("4개 일치 (50,000원) - " + lottoRankCountMap.get(LottoRank.FOURTH) + "개");
+        printMessage("5개 일치 (1,500,000원) - " + lottoRankCountMap.get(LottoRank.THIRD) + "개");
+        printMessage("5개 일치, 보너스 볼 일치 (30,000,000원) - " + lottoRankCountMap.get(LottoRank.SECOND) + "개");
+        printMessage("6개 일치 (2,000,000,000원) - " + lottoRankCountMap.get(LottoRank.FIRST) + "개");
     }
 
     public void printYieldRate(double yieldRate) {
